@@ -19,7 +19,7 @@ class Application
     #[ORM\Column(length: 255)]
     private ?string $token = null;
 
-    #[ORM\OneToOne(inversedBy: 'application', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'applications')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -33,8 +35,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $firstName = null;
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Application $application = null;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Application::class, orphanRemoval: true)]
+    private Collection $applications;
+
+    public function __construct()
+    {
+        $this->applications = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -130,24 +137,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getApplication(): ?Application
+    /**
+     * @return Collection<int, Application>
+     */
+    public function getApplications(): Collection
     {
-        return $this->application;
+        return $this->applications;
     }
 
-    public function setApplication(?Application $application): static
+    public function addApplication(Application $application): static
     {
-        // unset the owning side of the relation if necessary
-        if ($application === null && $this->application !== null) {
-            $this->application->setUser(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($application !== null && $application->getUser() !== $this) {
+        if (!$this->applications->contains($application)) {
+            $this->applications->add($application);
             $application->setUser($this);
         }
 
-        $this->application = $application;
+        return $this;
+    }
+
+    public function removeApplication(Application $application): static
+    {
+        if ($this->applications->removeElement($application)) {
+            // set the owning side to null (unless already changed)
+            if ($application->getUser() === $this) {
+                $application->setUser(null);
+            }
+        }
 
         return $this;
     }

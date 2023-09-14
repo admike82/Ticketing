@@ -28,11 +28,8 @@ class Ticket
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\ManyToOne]
-    private ?Application $application = null;
-
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $API_ID = null;
+    private ?string $apiId = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -98,26 +95,14 @@ class Ticket
         return $this;
     }
 
-    public function getApplication(): ?Application
+    public function getApiId(): ?string
     {
-        return $this->application;
+        return $this->apiId;
     }
 
-    public function setApplication(?Application $application): static
+    public function setApiId(?string $apiId): static
     {
-        $this->application = $application;
-
-        return $this;
-    }
-
-    public function getAPIID(): ?string
-    {
-        return $this->API_ID;
-    }
-
-    public function setAPIID(?string $API_ID): static
-    {
-        $this->API_ID = $API_ID;
+        $this->apiId = $apiId;
 
         return $this;
     }
