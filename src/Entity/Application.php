@@ -20,6 +20,7 @@ class Application
     private ?string $token = null;
 
     #[ORM\OneToOne(inversedBy: 'application', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
     public function getId(): ?int

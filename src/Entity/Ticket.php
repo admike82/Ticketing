@@ -16,14 +16,14 @@ class Ticket
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Author = null;
+    #[ORM\Column(length: 255)]
+    private ?string $author = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $CreatedAt = null;
+    private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
@@ -52,12 +52,12 @@ class Ticket
 
     public function getAuthor(): ?string
     {
-        return $this->Author;
+        return $this->author;
     }
 
-    public function setAuthor(?string $Author): static
+    public function setAuthor(?string $author): static
     {
-        $this->Author = $Author;
+        $this->author = $author;
 
         return $this;
     }
@@ -76,12 +76,12 @@ class Ticket
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->CreatedAt;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $CreatedAt): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->CreatedAt = $CreatedAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
