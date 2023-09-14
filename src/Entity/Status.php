@@ -23,6 +23,9 @@ class Status
     #[ORM\Column(length: 255)]
     private ?string $color = null;
 
+    /**
+    *@var Collection<int,Ticket>
+    */     
     #[ORM\OneToMany(mappedBy: 'level', targetEntity: Ticket::class)]
     private Collection $tickets;
 
