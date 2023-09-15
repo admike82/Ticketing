@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\TicketRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -40,7 +42,18 @@ class Ticket
     private ?Level $level = null;
 
     #[ORM\ManyToOne]
-    private ?User $user = null;
+    private ?UserAccount $userAccount = null;
+
+    /**
+     * @var Collection<int,Response>
+     */
+    #[ORM\OneToMany(mappedBy: 'ticket', targetEntity: Response::class, orphanRemoval: true)]
+    private Collection $responses;
+
+    public function __construct()
+    {
+        $this->responses = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -131,14 +144,44 @@ class Ticket
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUserAccount(): ?UserAccount
     {
-        return $this->user;
+        return $this->userAccount;
     }
 
-    public function setUser(?User $user): static
+    public function setUserAccount(?UserAccount $userAccount): static
     {
-        $this->user = $user;
+        $this->userAccount = $userAccount;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Response>
+     */
+    public function getResponses(): Collection
+    {
+        return $this->responses;
+    }
+
+    public function addResponse(Response $response): static
+    {
+        if (!$this->responses->contains($response)) {
+            $this->responses->add($response);
+            $response->setTicket($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResponse(Response $response): static
+    {
+        if ($this->responses->removeElement($response)) {
+            // set the owning side to null (unless already changed)
+            if ($response->getTicket() === $this) {
+                $response->setTicket(null);
+            }
+        }
 
         return $this;
     }

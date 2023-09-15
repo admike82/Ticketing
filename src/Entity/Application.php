@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ApplicationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ApplicationRepository::class)]
+#[ApiResource]
 class Application
 {
     #[ORM\Id]
@@ -21,7 +23,7 @@ class Application
 
     #[ORM\ManyToOne(inversedBy: 'applications')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    private ?UserAccount $userAccount = null;
 
     public function getId(): ?int
     {
@@ -52,14 +54,14 @@ class Application
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUserAccount(): ?UserAccount
     {
-        return $this->user;
+        return $this->userAccount;
     }
 
-    public function setUser(?User $user): static
+    public function setUserAccount(?UserAccount $userAccount): static
     {
-        $this->user = $user;
+        $this->userAccount = $userAccount;
 
         return $this;
     }
