@@ -41,7 +41,7 @@ class UserAccountRepository extends ServiceEntityRepository implements PasswordU
     }
 
 //    /**
-//     * @return User[] Returns an array of User objects
+//     * @return UserAccount[] Returns an array of UserAccount objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -55,7 +55,7 @@ class UserAccountRepository extends ServiceEntityRepository implements PasswordU
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?User
+//    public function findOneBySomeField($value): ?UserAccount
 //    {
 //        return $this->createQueryBuilder('u')
 //            ->andWhere('u.exampleField = :val')
