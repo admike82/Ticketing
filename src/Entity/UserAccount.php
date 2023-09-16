@@ -40,6 +40,8 @@ class UserAccount implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['user:read'])]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Email]
     #[ORM\Column(length: 180, unique: true)]
     #[Groups(['user:read', 'user:create', 'user:update'])]
     private ?string $email = null;
@@ -62,10 +64,12 @@ class UserAccount implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['user:create', 'user:update'])]
     private ?string $plainPassword = null;
 
+    #[Assert\NotBlank(groups: ['user:create'])]
     #[ORM\Column(length: 255)]
     #[Groups(['user:read', 'user:create', 'user:update'])]
     private ?string $name = null;
 
+    #[Assert\NotBlank(groups: ['user:create'])]
     #[ORM\Column(length: 255)]
     #[Groups(['user:read', 'user:create', 'user:update'])]
     private ?string $firstName = null;
