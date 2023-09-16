@@ -57,7 +57,6 @@ class UserAccount implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Groups(['user:create', 'user:update'])]
     private ?string $password = null;
 
     #[Assert\NotBlank(groups: ['user:create'])]
