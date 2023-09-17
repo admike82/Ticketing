@@ -7,18 +7,25 @@ use ApiPlatform\State\ProcessorInterface;
 use App\Entity\UserAccount;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-// @phpstan-ignore-next-line
+/**
+ * @implements ProcessorInterface<mixed>
+ */
 final class UserPasswordHasher implements ProcessorInterface
 {
-    // @phpstan-ignore-next-line
+    /**
+     * @param ProcessorInterface<mixed> $processor
+     * @param UserPasswordHasherInterface $passwordHasher
+     */
     public function __construct(private readonly ProcessorInterface $processor, private readonly UserPasswordHasherInterface $passwordHasher)
     {
     }
     
     /**
-     * @var UserAccount $data
+     * @param UserAccount $data
+     * @param Operation $operation
+     * @param array<string,mixed> $uriVariables
+     * @param array<string,mixed> $context
      */
-    // @phpstan-ignore-next-line
     public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         if (!$data->getPlainPassword()) {
@@ -29,6 +36,7 @@ final class UserPasswordHasher implements ProcessorInterface
             $data,
             $data->getPlainPassword()
         );
+
         $data->setPassword($hashedPassword);
         $data->eraseCredentials();
 
