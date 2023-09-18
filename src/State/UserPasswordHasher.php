@@ -26,6 +26,7 @@ final class UserPasswordHasher implements ProcessorInterface
      * @param Operation $operation
      * @param array<string,mixed> $uriVariables
      * @param array<string,mixed> $context
+     * @return PersistProcessor
      */
     public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
