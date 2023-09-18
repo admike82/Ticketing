@@ -2,18 +2,19 @@
 
 namespace App\State;
 
+use ApiPlatform\Doctrine\Common\State\PersistProcessor;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Entity\UserAccount;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
- * @implements ProcessorInterface<mixed>
+ * @implements ProcessorInterface<PersistProcessor>
  */
 final class UserPasswordHasher implements ProcessorInterface
 {
     /**
-     * @param ProcessorInterface<mixed> $processor
+     * @param ProcessorInterface<PersistProcessor> $processor
      * @param UserPasswordHasherInterface $passwordHasher
      */
     public function __construct(private readonly ProcessorInterface $processor, private readonly UserPasswordHasherInterface $passwordHasher)
