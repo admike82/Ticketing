@@ -1,22 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LoginController!{% endblock %}
+{% block title %}Hello LoginController!
+{% endblock %}
 
 {% block body %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+	{% if error %}
+		<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+	{% endif %}
+	<div class="login-container">
 
-    <form action="{{ path('app_login') }}" method="post">
-        <label for="username">Email :</label>
-        <input type="email" id="username" name="_username" value="{{ last_username }}">
+		<div class="login-title">
+			<h2>Connexion</h2>
+		</div>
 
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="_password">
+		<div class="login-content">
+			<form class="login-form" action="{{ path('app_login') }}" method="post">
+				<div>
 
-        {# If you want to control the URL the user is redirected to on success
-        <input type="hidden" name="_target_path" value="/account"> #}
+					<label for="username" class="login-label">Email :</label>
+					<div class="mt-2">
+						<input type="email" id="username" name="_username" value="{{ last_username }}" required class="login-input"/>
+					</div>
+				</div>
+				<div>
+					<div class="flex items-center justify-between">
+						<label class="login-label" for="password">Mot de passe :</label>
+						<div class="text-sm">
+							<a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Mot de passe oublié ?</a>
+						</div>
+					</div>
+					<div class="mt-2">
+						<input required class="login-input" type="password" id="password" name="_password">
+					</div>
+				</div>
 
-        <button type="submit">Connexion</button>
-    </form>
+
+				{# If you want to control the URL the user is redirected to on success <input type="hidden" name="_target_path" value="/account"> #}
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+				<div>
+					<button type="submit">Connexion</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
 {% endblock %}

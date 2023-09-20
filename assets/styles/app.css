@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  @import "./Components/_Ticket.css";
+  @import "./Layouts/_Dashboard.css";
+  @import "./Layouts/_Login.css";
+}

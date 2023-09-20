@@ -1,0 +1,47 @@
+.ticket {
+  @apply block 
+    rounded-lg 
+    bg-white 
+    p-6 
+    shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] 
+    dark:bg-neutral-700;
+}
+.ticket-title {
+  @apply mb-2 
+    text-xl 
+    font-medium 
+    leading-tight 
+    text-neutral-800 
+    dark:text-neutral-50;
+}
+.ticket-tag-container {
+  @apply flex 
+    gap-1.5;
+}
+.ticket-tag {
+  @apply relative 
+    whitespace-nowrap 
+    rounded-full 
+    px-[0.65em] 
+    pb-[0.25em] 
+    pt-[0.35em] 
+    text-center 
+    align-baseline 
+    text-[0.75em] 
+    font-bold 
+    leading-none 
+    text-neutral-800 
+    dark:text-neutral-50
+    before:absolute 
+    before:left-[-0.5rem] 
+    before:w-[0.75rem] 
+    before:h-[0.75rem] 
+    before:rounded-full 
+    before:bg-[var(--bg-color)];
+}
+.ticket-content {
+  @apply mb-4 
+    text-base 
+    text-neutral-600 
+    dark:text-neutral-200;
+}

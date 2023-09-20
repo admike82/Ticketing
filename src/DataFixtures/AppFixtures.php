@@ -18,8 +18,6 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        // $product = new Product();
-        // $manager->persist($product);
         $urgencyLevel = new Level();
         $urgencyLevel->setName("Urgent")->setColor("#eb2f06");
         $manager->persist($urgencyLevel);

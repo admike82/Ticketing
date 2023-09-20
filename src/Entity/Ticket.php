@@ -50,6 +50,9 @@ class Ticket
     #[ORM\OneToMany(mappedBy: 'ticket', targetEntity: Response::class, orphanRemoval: true)]
     private Collection $responses;
 
+    #[ORM\ManyToOne(inversedBy: 'tickets')]
+    private ?Application $application = null;
+
     public function __construct()
     {
         $this->responses = new ArrayCollection();
@@ -182,6 +185,18 @@ class Ticket
                 $response->setTicket(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getApplication(): ?Application
+    {
+        return $this->application;
+    }
+
+    public function setApplication(?Application $application): static
+    {
+        $this->application = $application;
 
         return $this;
     }
