@@ -9,8 +9,8 @@ use App\Entity\UserAccount;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
- * @template T
- * @implements ProcessorInterface<T>
+ * @template UserAccount
+ * @implements ProcessorInterface<UserAccount>
  */
 final class UserPasswordHasher implements ProcessorInterface
 {
@@ -21,12 +21,13 @@ final class UserPasswordHasher implements ProcessorInterface
     public function __construct(private readonly ProcessorInterface $processor, private readonly UserPasswordHasherInterface $passwordHasher)
     {
     }
-    
+
     /**
      * @param UserAccount $data
      * @param Operation $operation
      * @param array<string,mixed> $uriVariables
      * @param array<string,mixed> $context
+     * @return UserAccount
      */
     public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
