@@ -9,31 +9,29 @@
 	{% endif %}
 	<div class="login-container">
 
-		<div class="login-title">
+		<header>
 			<h2>Connexion</h2>
-		</div>
+		</header>
 
-		<div class="login-content">
-			<form class="login-form" action="{{ path('app_login') }}" method="post">
+		<section>
+			<form action="{{ path('app_login') }}" method="post">
 				<div>
-
-					<label for="username" class="login-label">Email :</label>
+					<label for="username">Email :</label>
 					<div class="mt-2">
-						<input type="email" id="username" name="_username" value="{{ last_username }}" required class="login-input"/>
+						<input type="email" id="username" name="_username" value="{{ last_username }}" required/>
 					</div>
 				</div>
 				<div>
 					<div class="flex items-center justify-between">
-						<label class="login-label" for="password">Mot de passe :</label>
+						<label for="password">Mot de passe :</label>
 						<div class="text-sm">
 							<a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Mot de passe oublié ?</a>
 						</div>
 					</div>
 					<div class="mt-2">
-						<input required class="login-input" type="password" id="password" name="_password">
+						<input type="password" id="password" name="_password" required>
 					</div>
 				</div>
-
 
 				{# If you want to control the URL the user is redirected to on success <input type="hidden" name="_target_path" value="/account"> #}
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -42,7 +40,6 @@
 					<button type="submit">Connexion</button>
 				</div>
 			</form>
-		</div>
+		</section>
 	</div>
-
 {% endblock %}
