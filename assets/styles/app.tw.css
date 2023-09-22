@@ -4,6 +4,33 @@
 
 @layer components {
   @import "./Components/_Ticket.tw.css";
+  @import "./Components/_Navbar.tw.css";
+
   @import "./Layouts/_Dashboard.tw.css";
   @import "./Layouts/_Login.tw.css";
+
+  html {
+    @apply 
+      h-full;
+  }
+  body {
+    @apply bg-neutral-200
+    dark:bg-neutral-700
+    text-gray-900
+    dark:text-neutral-200
+    h-full;
+  }
+
 }
+/* .dropdown {
+  position: relative;
+  display: inline-block;
+} */
+
+/* .dropdown-content {
+  display: none;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+} */

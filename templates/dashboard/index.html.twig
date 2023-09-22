@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'dashboardLaoyout.html.twig' %}
 
-{% block title %}DashboardController
+{% block title %}Dashboard - index
 {% endblock %}
 
-{% block body %}
+{% block content %}
 	<div class="dashboard-content">
 		{% for ticket in tickets %}
 			<div class="ticket">

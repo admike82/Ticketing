@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<div
+		class="min-h-full">
+		{# navbar #}
+		{{ component('NavbarComponent') }}
+
+		<main>
+			<div class="py-6 sm:px-6 lg:px-8">
+				{% block content %}{% endblock %}
+			</div>
+		</main>
+
+		<div>
+
+		{% endblock %}
