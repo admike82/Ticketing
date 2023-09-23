@@ -8,51 +8,39 @@
       h-16 
       items-center 
       justify-between;
-    & article:nth-child(1) {
-      @apply flex 
+    & div:nth-child(1) {
+      @apply flex
         items-center;
-      & div:nth-child(1) {
-        @apply flex-shrink-0;
-      }
       & img {
         @apply h-8 
           w-8;
       }
-      & main {
+      & div {
         @apply hidden 
-          md:block;
-        & div {
-          @apply ml-10 
-            flex 
-            items-baseline 
-            space-x-4;
-          & a {
-            @apply text-gray-300 
-              hover:bg-gray-700 
-              hover:text-white 
-              rounded-md 
-              px-3 
-              py-2 
-              text-sm 
-              font-medium;
-            &.active {
-              @apply bg-gray-900 
-                text-white;
-            }
+          ml-10 
+          md:flex 
+          items-baseline 
+          space-x-4;
+        & a {
+          @apply text-gray-300 
+            hover:bg-gray-700 
+            hover:text-white 
+            rounded-md 
+            px-3 
+            py-2 
+            text-sm 
+            font-medium;
+          &.active {
+            @apply bg-gray-900 
+              text-white;
           }
         }
       }
     }
-    & article:nth-child(2) {
+    & div:nth-child(2) {
       @apply hidden 
-        md:block;
-      > div {
-        @apply ml-4 
-          flex 
-          items-center 
-          md:ml-6;
-      }
-      .notification {
+        md:flex;
+      & button {
         @apply relative 
           rounded-full 
           bg-gray-800 
@@ -65,21 +53,19 @@
           focus:ring-offset-2 
           focus:ring-offset-gray-800;
       }
-      main {
+      & div:nth-child(2) {
         @apply relative 
-          ml-3;
-        &:hover {
+          ml-3
+          hover:block;
+        &:hover div {
           @apply block;
-          div:nth-child(2) {
-            @apply block;
-          }
         }
-        div:nth-child(2) {
+        & div {
           @apply absolute 
             right-0 
             z-10 
             w-48 
-            pt-2 
+            pt-1 
             origin-top-right  
             shadow-lg 
             ring-1 
@@ -87,23 +73,25 @@
             ring-opacity-5 
             focus:outline-none 
             hidden;
-        }
-        a {
-          @apply block 
-            bg-neutral-100 
-            dark:bg-neutral-200 
+          & a {
+            @apply block  
             px-4 
             py-2 
-            text-sm 
+            text-sm
+            bg-neutral-100 
+            dark:bg-neutral-200
             text-gray-700 
-            hover:bg-gray-900 
+            hover:bg-gray-500 
             hover:text-gray-200;
-        }
-        a:nth-child(1) {
-          @apply rounded-t-md;
-        }
-        a:last-child {
-          @apply rounded-b-md;
+          }
+          & a:nth-child(1) {
+            @apply rounded-t-md;
+          }
+          & a:last-child {
+            @apply rounded-b-md 
+            text-red-700 
+            hover:bg-red-200;
+          }
         }
       }
     }

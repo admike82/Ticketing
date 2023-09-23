@@ -5,18 +5,18 @@
   justify-center 
   translate-y-[-8rem];
 
-  header {
+  & header {
     @apply sm:mx-auto 
     sm:w-full 
     sm:max-w-sm;
 
-    img {
+    & img {
       @apply mx-auto 
       h-10 
       w-auto;
     }
 
-    h2 {
+    & h2 {
       @apply mt-10 
       text-center 
       text-2xl 
@@ -26,24 +26,24 @@
     }
   }
 
-  section {
+  & section {
     @apply mt-10 
     sm:mx-auto 
     sm:w-full 
     sm:max-w-sm;
 
-    form {
+    & form {
       @apply space-y-6;
     }
 
-    label {
+    & label {
       @apply block 
       text-sm 
       font-medium 
       leading-6 ;
     }
 
-    input {
+    & input {
       @apply block 
       w-full 
       rounded-md 
@@ -62,7 +62,7 @@
       px-1.5;
     }
 
-    button {
+    & button {
       @apply flex 
       w-full 
       justify-center 

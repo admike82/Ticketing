@@ -3,15 +3,8 @@
 @tailwind utilities;
 
 @layer components {
-  @import "./Components/_Ticket.tw.css";
-  @import "./Components/_Navbar.tw.css";
-
-  @import "./Layouts/_Dashboard.tw.css";
-  @import "./Layouts/_Login.tw.css";
-
   html {
-    @apply 
-      h-full;
+    @apply h-full;
   }
   body {
     @apply bg-neutral-200
@@ -21,6 +14,11 @@
     h-full;
   }
 
+  @import "./Components/_Ticket.tw.css";
+  @import "./Components/_Navbar.tw.css";
+
+  @import "./Layouts/_Dashboard.tw.css";
+  @import "./Layouts/_Login.tw.css";
 }
 /* .dropdown {
   position: relative;

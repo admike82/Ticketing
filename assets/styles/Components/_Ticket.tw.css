@@ -6,7 +6,7 @@
   p-6 
   shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)];
 
-  h5 {
+  & h5 {
     @apply mb-2 
     text-xl 
     font-medium 
@@ -14,11 +14,11 @@
     text-neutral-800;
   }
 
-  section {
+  & section {
     @apply flex 
     gap-1.5;
 
-    div {
+    & div {
       @apply relative 
       px-[0.65em] 
       pb-[0.25em] 
@@ -37,7 +37,7 @@
     }
   }
 
-  p {
+  & p {
     @apply mb-4 
     text-base 
     text-neutral-600;

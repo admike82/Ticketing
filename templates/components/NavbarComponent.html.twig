@@ -1,44 +1,31 @@
 <nav class="navbar">
 	<section>
-		<article>
+		<div>
+			<img src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
 			<div>
-				<img src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+				<a href="{{path("app_dashboard")}}" {%if app.request.get('_route')=='app_dashboard'%} class="active" {%endif%}>Dashboard</a>
+				<a href="{{path("app_admin")}}" {%if app.request.get('_route')=='app_admin'%} class="active" {%endif%}>Admin</a>
 			</div>
-			<main>
-				<div>
-					<a href="{{path("app_dashboard")}}" class="{% if app.request.get('_route') == 'app_dashboard' %}active {% endif %}" aria-current="page">
-						Dashboard
-					</a>
-					<a href="{{path("app_admin")}}" class="{% if app.request.get('_route') == 'app_admin' %}active {% endif %}">
-						Admin
-					</a>
-				</div>
-			</main>
-		</article>
-		<article>
-			<div>
-				<button type="button" class="notification">
-					<svg class="h-6 w-6" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/>
-					</svg>
-				</button>
+		</div>
+		<div>
+			<button>
+				<svg class="h-6 w-6" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/>
+				</svg>
+			</button>
 
-				<!-- Profile dropdown -->
-				<main>
-					<div>
-						<button type="button" class="notification" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-							<img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-						</button>
-					</div>
-					<div>
-						<!-- Active: "bg-gray-100", Not Active: "" -->
-						<a href="#" id="user-menu-item-0">Your Profile</a>
-						<a href="#" id="user-menu-item-1">Settings</a>
-						<a href="{{path("app_logout")}}" id="user-menu-item-2">Déconnexion</a>
-					</div>
-				</main>
+			<!-- Profile dropdown -->
+			<div>
+				<button>
+					<img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+				</button>
+				<div>
+					<a href="#">Your Profile</a>
+					<a href="#">Settings</a>
+					<a href={{ path('app_logout') }}>Déconnexion</a>
+				</div>
 			</div>
-		</article>
+		</div>
 		<div
 			class="-mr-2 flex md:hidden">
 			<!-- Mobile menu button -->
