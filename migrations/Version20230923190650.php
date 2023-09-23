@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230923182823 extends AbstractMigration
+final class Version20230923190650 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,6 +20,12 @@ final class Version20230923182823 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('CREATE SEQUENCE application_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE level_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE response_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE status_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE ticket_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE user_account_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE application (id INT NOT NULL, user_account_id INT NOT NULL, name VARCHAR(255) NOT NULL, token VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_A45BDDC15F37A13B ON application (token)');
         $this->addSql('CREATE INDEX IDX_A45BDDC13C0C9956 ON application (user_account_id)');
@@ -67,6 +73,12 @@ final class Version20230923182823 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
+        $this->addSql('DROP SEQUENCE application_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE level_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE response_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE status_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE ticket_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE user_account_id_seq CASCADE');
         $this->addSql('ALTER TABLE application DROP CONSTRAINT FK_A45BDDC13C0C9956');
         $this->addSql('ALTER TABLE response DROP CONSTRAINT FK_3E7B0BFB700047D2');
         $this->addSql('ALTER TABLE response DROP CONSTRAINT FK_3E7B0BFB3C0C9956');
