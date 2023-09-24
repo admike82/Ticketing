@@ -7,13 +7,13 @@
 	<div class="dashboard-content">
 		{% for ticket in tickets %}
 			<div class="ticket">
-				<h5>{{ticket.author ?? ticket.userAccount.name}}</h5>
+				<h5>{{ticket.author ?? (ticket.userAccount.firstName ~ ' ' ~ ticket.userAccount.name) }}</h5>
 				<section>
 					<div style="--bg-color: {{ticket.status.color}};">{{ticket.status.name}}</div>
 					<div style="--bg-color: {{ticket.level.color}};">{{ticket.level.name}}</div>
 				</section>
 				<p>
-					{{ticket.content}}
+					{{ticket.content | nl2br}}
 				</p>
 			</div>
 		{% endfor %}
