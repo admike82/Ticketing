@@ -33,7 +33,7 @@ class Ticket
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $apiId = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'tickets')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Status $status = null;
 

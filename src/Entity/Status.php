@@ -26,7 +26,7 @@ class Status
     /**
      * @var Collection<int,Ticket>
      */
-    #[ORM\OneToMany(mappedBy: 'level', targetEntity: Ticket::class)]
+    #[ORM\OneToMany(mappedBy: 'status', targetEntity: Ticket::class)]
     private Collection $tickets;
 
     public function __construct()
