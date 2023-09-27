@@ -9,10 +9,23 @@ security:
       entity:
         class: App\Entity\UserAccount
         property: email
+    
+    api_user_provider:
+      entity:
+        class: App\Entity\Application
+
   firewalls:
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
+
+    api:
+      pattern: ^/api
+      stateless: true
+      provider: api_user_provider
+      custom_authenticator: App\Security\AccessTokenHandler
+
+      
     main:
       lazy: true
       provider: app_user_provider
@@ -35,6 +48,7 @@ security:
   access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
     - { path: ^/dashboard, roles: ROLE_USER }
+    - { path: ^/api, roles: IS_AUTHENTICATED_FULLY}
 
 when@test:
   security:

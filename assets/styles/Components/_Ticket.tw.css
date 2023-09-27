@@ -1,22 +1,24 @@
 .ticket {
   @apply block 
   rounded-lg 
-  bg-neutral-100 
+  bg-neutral-100  
+  !text-neutral-800
+  dark:!text-neutral-800
   dark:bg-neutral-200
   w-[340px]
   p-6 
   shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)];
 
   & h5 {
-    @apply mb-2 
-    text-xl 
+    @apply text-xl 
     font-medium 
-    leading-tight 
-    text-neutral-800;
+    leading-tight;
   }
 
   & div {
-    @apply grid grid-cols-2 
+    @apply mt-2 
+    grid 
+    grid-cols-2 
     gap-1.5;
 
     & span {
@@ -29,8 +31,7 @@
       text-left 
       text-[0.75em] 
       font-bold 
-      leading-none 
-      text-neutral-800
+      leading-none
       before:absolute 
       before:left-[-0.5rem] 
       before:w-[0.75rem] 

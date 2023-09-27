@@ -6,28 +6,36 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ApplicationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: ApplicationRepository::class)]
-#[ApiResource]
-class Application
+#[ApiResource(
+    normalizationContext: ['groups' => ['application:read']],
+)]
+class Application implements UserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['application:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['application:read'])]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255, unique: true)]
+    #[ORM\Column(length: 255, unique: true, nullable: true)]
     private ?string $token = null;
 
     #[ORM\ManyToOne(inversedBy: 'applications')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['application:read'])]
     private ?UserAccount $userAccount = null;
 
     #[ORM\OneToMany(mappedBy: 'application', targetEntity: Ticket::class)]
+    #[Groups(['application:read'])]
     private Collection $tickets;
 
     public function __construct()
@@ -104,5 +112,24 @@ class Application
         }
 
         return $this;
+    }
+
+    public function getRoles(): array
+    {
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_APPLICATION';
+
+        return array_unique($roles);
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->token;
+    }
+
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }

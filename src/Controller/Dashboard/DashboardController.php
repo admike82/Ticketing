@@ -2,7 +2,6 @@
 
 namespace App\Controller\Dashboard;
 
-use App\Entity\Ticket;
 use App\Entity\UserAccount;
 use App\Repository\ApplicationRepository;
 use App\Repository\TicketRepository;
@@ -12,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class DashboardController extends AbstractController
+
 {
     #[Route('/dashboard', name: 'app_dashboard')]
     public function index(#[CurrentUser] ?UserAccount $user, TicketRepository $ticketRepository, ApplicationRepository $applicationRepository): Response

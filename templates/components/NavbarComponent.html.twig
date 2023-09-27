@@ -3,8 +3,8 @@
 		<div>
 			<img src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
 			<div>
-				<a href="{{path("app_dashboard")}}" {% if app.request.get('_route')=='app_dashboard' %} class="active" {% endif %}>Dashboard</a>
-				<a href="{{path("app_admin")}}" {% if app.request.get('_route')=='app_admin' %} class="active" {% endif %}>Admin</a>
+				<a href="{{path("app_dashboard")}}" {% if 'app_dashboard' in app.request.get('_route') %} class="active" {% endif %}>Dashboard</a>
+				<a href="{{path("app_admin")}}" {% if 'app_admin' in app.request.get('_route') %} class="active" {% endif %}>Admin</a>
 			</div>
 		</div>
 		<div>

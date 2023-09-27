@@ -7,7 +7,8 @@
 	<section class="dashboard-content">
 		{% for ticket in tickets %}
 			<article class="ticket">
-				<h5>{{ticket.author ?? (ticket.userAccount.firstName ~ ' ' ~ ticket.userAccount.name) }}</h5>
+				<h5>{{ticket.subject }}</h5>
+				<small>{{ticket.author ?? (ticket.userAccount.firstName ~ ' ' ~ ticket.userAccount.name) }}</small>
 				<div>
 					<span style="--bg-color: {{ticket.status.color}};">{{ticket.status.name}}</span>
 					<span style="--bg-color: {{ticket.level.color}};">{{ticket.level.name}}</span>

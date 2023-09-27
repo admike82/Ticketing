@@ -53,6 +53,9 @@ class Ticket
     #[ORM\ManyToOne(inversedBy: 'tickets')]
     private ?Application $application = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $subject = null;
+
     public function __construct()
     {
         $this->responses = new ArrayCollection();
@@ -197,6 +200,18 @@ class Ticket
     public function setApplication(?Application $application): static
     {
         $this->application = $application;
+
+        return $this;
+    }
+
+    public function getSubject(): ?string
+    {
+        return $this->subject;
+    }
+
+    public function setSubject(string $subject): static
+    {
+        $this->subject = $subject;
 
         return $this;
     }

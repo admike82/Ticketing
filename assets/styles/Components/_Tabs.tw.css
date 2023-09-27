@@ -1,0 +1,9 @@
+.tabs_nav {
+  @apply p-2;
+  & ul {
+    @apply flex;
+    & a {
+      @apply block p-1 bg-neutral-100 text-neutral-900 border border-neutral-900 rounded-t-xl;
+    }
+  }
+}

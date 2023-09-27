@@ -14,8 +14,21 @@
     h-full;
   }
 
+  .alert-success, .alert-danger {
+    @apply text-center font-bold text-lg m-1 p-2 rounded-lg;
+  }
+
+  .alert-success {
+    @apply text-green-800 bg-green-100
+  }
+
+  .alert-danger {
+    @apply text-red-800 bg-red-100;
+  }
+
   @import "./Components/_Ticket.tw.css";
   @import "./Components/_Navbar.tw.css";
+  @import "./Components/_Tabs.tw.css";
 
   @import "./Layouts/_Dashboard.tw.css";
   @import "./Layouts/_Login.tw.css";
