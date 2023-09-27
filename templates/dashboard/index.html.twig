@@ -4,19 +4,17 @@
 {% endblock %}
 
 {% block content %}
-	<section class="dashboard-content">
 		{% for ticket in tickets %}
-			<article class="ticket">
+			<section class="ticket">
 				<h5>{{ticket.subject }}</h5>
 				<small>{{ticket.author ?? (ticket.userAccount.firstName ~ ' ' ~ ticket.userAccount.name) }}</small>
-				<div>
+				<article>
 					<span style="--bg-color: {{ticket.status.color}};">{{ticket.status.name}}</span>
 					<span style="--bg-color: {{ticket.level.color}};">{{ticket.level.name}}</span>
 					<p>
 						{{ticket.content | nl2br}}
 					</p>
-				</div>
-			</article>
+				</article>
+			</section>
 		{% endfor %}
-	</section>
 {% endblock %}
