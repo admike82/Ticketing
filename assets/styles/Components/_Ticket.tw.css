@@ -3,6 +3,7 @@
   rounded-lg 
   bg-neutral-100 
   dark:bg-neutral-200
+  w-[340px]
   p-6 
   shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)];
 
@@ -14,16 +15,18 @@
     text-neutral-800;
   }
 
-  & section {
-    @apply flex 
+  & div {
+    @apply grid grid-cols-2 
     gap-1.5;
 
-    & div {
+    & span {
       @apply relative 
+      block
       px-[0.65em] 
       pb-[0.25em] 
       pt-[0.35em] 
-      text-center 
+      ml-[0.5rem]
+      text-left 
       text-[0.75em] 
       font-bold 
       leading-none 
@@ -35,11 +38,11 @@
       before:rounded-full 
       before:bg-[var(--bg-color)];
     }
-  }
-
-  & p {
-    @apply mb-4 
-    text-base 
-    text-neutral-600;
+    & p {
+      @apply col-span-2 
+      mb-4 
+      text-base 
+      text-neutral-600;
+    }
   }
 }
