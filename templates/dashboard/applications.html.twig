@@ -1,7 +1,6 @@
 {% extends 'dashboardLaoyout.html.twig' %}
 
 {% block content %}
-	<div>
 		{% for application in applications %}
 			<article class="ticket">
 				<h5>{{ application.name }}</h5>
@@ -19,5 +18,4 @@
 			</article>
 		{% endfor %}
 		<a href={{ path("app_dashboard_applications_add")}}>Ajouter une app</a>
-	</div>
 {% endblock %}
