@@ -59,6 +59,7 @@ class Ticket
     public function __construct()
     {
         $this->responses = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int

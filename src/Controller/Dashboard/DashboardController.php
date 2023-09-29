@@ -14,25 +14,10 @@ class DashboardController extends AbstractController
 
 {
     #[Route('/dashboard', name: 'app_dashboard')]
-    public function index(#[CurrentUser] ?UserAccount $user, TicketRepository $ticketRepository, ApplicationRepository $applicationRepository): Response
+    public function index(): Response
     {
-        if ($user === null) {
-            return $this->redirectToRoute('app_login');
-        }
-        if (in_array('ROLE_ADMIN', $user->getRoles())) {
-            $tickets = $ticketRepository->findAll();
-        } else {
-            $applications = $applicationRepository->findBy(['userAccount' => $user->getId()]);
-            $ticketsApp = [];
-            foreach ($applications as $application) {
-                $ticketsApp = array_merge($ticketsApp, $application->getTickets()->toArray());
-            }
-            $ticketsUser = $ticketRepository->findBy(['userAccount' => $user->getId()]);
-            $tickets = array_merge($ticketsApp, $ticketsUser);
-        }
         return $this->render('dashboard/index.html.twig', [
-            'controller_name' => 'DashboardController',
-            'tickets' => $tickets
+            'controller_name' => 'DashboardController'
         ]);
     }
 }

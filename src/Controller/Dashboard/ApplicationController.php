@@ -8,7 +8,6 @@ use App\Form\ApplicationType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ApplicationRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -72,7 +71,7 @@ class ApplicationController extends AbstractController
         $em->persist($application);
         $em->flush();
 
-        $this->addFlash('success', "le token a été généré !");
+        $this->addFlash('success', "Veuillez notez le token suivant : " . $token . "\n Il ne sera plus consultable.");
         return $this->redirectToRoute("app_dashboard_applications");
     }
 }

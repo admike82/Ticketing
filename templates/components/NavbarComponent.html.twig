@@ -2,10 +2,21 @@
 	<section>
 		<div>
 			<img src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
-			<div>
-				<a href="{{path("app_dashboard")}}" {% if 'app_dashboard' in app.request.get('_route') %} class="active" {% endif %}>Dashboard</a>
-				<a href="{{path("app_admin")}}" {% if 'app_admin' in app.request.get('_route') %} class="active" {% endif %}>Admin</a>
-			</div>
+			<ul>
+				<li>
+					<a href="{{path("app_dashboard")}}" {% if 'app_dashboard' in app.request.get('_route') %} class="active" {% endif %}>Dashboard</a>
+					<ul class="subMenu">
+						{% for route in routes %}
+							<li>
+								<a href="{{ path(route.path) }}" {% if route.path in app.request.get('_route') %} class="active" {% endif %}>{{ route.label }}</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</li>
+				<li>
+					<a href="{{path("app_admin")}}" {% if 'app_admin' in app.request.get('_route') %} class="active" {% endif %}>Admin</a>
+				</li>
+			</ul>
 		</div>
 		<div>
 			<button>

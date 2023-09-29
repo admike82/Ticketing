@@ -2,19 +2,19 @@
 
 namespace App\Security;
 
+use App\Entity\Application;
 use App\Repository\ApplicationRepository;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
-use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
-use Symfony\Component\Security\Core\Exception\UserNotFoundException;
-
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
+use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 
 class AccessTokenHandler extends AbstractAuthenticator
 {
@@ -31,22 +31,21 @@ class AccessTokenHandler extends AbstractAuthenticator
   public function authenticate(Request $request): Passport
   {
     $apiToken = $request->headers->get('Authorization');
-    
+
     if (null === $apiToken) {
       throw new CustomUserMessageAuthenticationException('Token obligatoire !');
     }
 
     $bearer = explode(' ', $apiToken)[1];
-
     return new SelfValidatingPassport(
       new UserBadge($bearer, function ($bearer) {
-        $user = $this->repository->findOneBy(['token' => $bearer]);
+        $application = $this->repository->findOneBy(['token' => $bearer]);
 
-        if (!$user) {
+        if (!$application) {
           throw new UserNotFoundException("Token invalide !");
         }
 
-        return $user;
+        return $application;
       })
     );
   }

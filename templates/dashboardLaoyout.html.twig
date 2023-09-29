@@ -6,15 +6,14 @@
 		class="min-h-full">
 		{# navbar #}
 		{{ component('NavbarComponent') }}
-		{{ component('TabsComponent') }}
 		{% for message in app.flashes('success') %}
 			<div class="alert-success">
-				{{ message }}
+				{{ message | nl2br }}
 			</div>
 		{% endfor %}
 		{% for message in app.flashes('danger') %}
 			<div class="alert-danger">
-				{{ message }}
+				{{ message | nl2br }}
 			</div>
 		{% endfor %}
 
