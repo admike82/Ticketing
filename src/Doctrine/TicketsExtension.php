@@ -2,15 +2,16 @@
 
 namespace App\Doctrine;
 
+use App\Entity\Ticket;
 use App\Entity\Application;
 use Doctrine\ORM\QueryBuilder;
 use ApiPlatform\Metadata\Operation;
 use Symfony\Bundle\SecurityBundle\Security;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
-use App\Entity\Ticket;
 
-final class TicketsExtension implements QueryCollectionExtensionInterface
+final class TicketsExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
 
     public function __construct(private readonly Security $security)
@@ -18,6 +19,11 @@ final class TicketsExtension implements QueryCollectionExtensionInterface
     }
 
     public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, Operation $operation = null, array $context = []): void
+    {
+        $this->addWhere($queryBuilder, $resourceClass);
+    }
+
+    public function applyToItem(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, array $identifiers, Operation $operation = null, array $context = []): void
     {
         $this->addWhere($queryBuilder, $resourceClass);
     }
