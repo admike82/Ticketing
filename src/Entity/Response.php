@@ -2,13 +2,22 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\ApiResource;
-use App\Repository\ResponseRepository;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use App\Repository\ResponseRepository;
+use ApiPlatform\Metadata\GetCollection;
 
 #[ORM\Entity(repositoryClass: ResponseRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new Get(),
+        new Post(),
+        new GetCollection()
+    ],
+)]
 class Response
 {
     #[ORM\Id]
@@ -33,13 +42,15 @@ class Response
     private ?UserAccount $userAccount = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Author = null;
+    private ?string $author = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $apiId = null;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -109,12 +120,12 @@ class Response
 
     public function getAuthor(): ?string
     {
-        return $this->Author;
+        return $this->author;
     }
 
     public function setAuthor(?string $Author): static
     {
-        $this->Author = $Author;
+        $this->author = $Author;
 
         return $this;
     }

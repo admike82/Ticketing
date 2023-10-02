@@ -14,9 +14,6 @@ class SecurityController extends AbstractController
     #[Route('/', name: 'app_login')]
     public function index(#[CurrentUser] ?UserAccount $user,AuthenticationUtils $authenticationUtils): Response
     {
-        // $salt = $this->getParameter("app.security.salt");
-        // $testCrypt = crypt('123456789azerty!', $salt);
-        // dd($testCrypt);
         if ($user !== null) {
             return $this->redirectToRoute('app_dashboard');
         }

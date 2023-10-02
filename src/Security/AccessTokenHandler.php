@@ -36,13 +36,16 @@ class AccessTokenHandler extends AbstractAuthenticator
       throw new CustomUserMessageAuthenticationException('Token obligatoire !');
     }
 
-    $bearer = explode(' ', $apiToken)[1];
+    $bearerPlain = explode(' ', $apiToken)[1];
+    //crypter le token
+    $salt = $_ENV['APP_SALT'];
+    $bearer = crypt($bearerPlain, $salt);
     return new SelfValidatingPassport(
       new UserBadge($bearer, function ($bearer) {
         $application = $this->repository->findOneBy(['token' => $bearer]);
 
         if (!$application) {
-          throw new UserNotFoundException("Token invalide !");
+          throw new CustomUserMessageAuthenticationException("Token invalide !");
         }
 
         return $application;

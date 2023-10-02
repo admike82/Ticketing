@@ -60,18 +60,22 @@ class ApplicationController extends AbstractController
             return $this->redirectToRoute("app_dashboard_applications");
         }
 
-        $length = 10;
+        $length = 64;
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
-        $token = '';
+        $tokenPlain = '';
         for ($i = 0; $i < $length; $i++) {
-            $token .= $characters[random_int(0, $charactersLength - 1)];
+            $tokenPlain .= $characters[random_int(0, $charactersLength - 1)];
         }
+        //crypter le token
+        $salt = $this->getParameter('app.security.salt');
+        $token = crypt($tokenPlain, $salt); 
+
         $application->setToken($token);
         $em->persist($application);
         $em->flush();
 
-        $this->addFlash('success', "Veuillez notez le token suivant : " . $token . "\n Il ne sera plus consultable.");
+        $this->addFlash('success', "Veuillez notez le token suivant : " . $tokenPlain . "\n Il ne sera plus consultable.");
         return $this->redirectToRoute("app_dashboard_applications");
     }
 }

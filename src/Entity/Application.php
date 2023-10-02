@@ -2,17 +2,22 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\ApplicationRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: ApplicationRepository::class)]
 #[ApiResource(
+    operations: [
+        new Get(),
+        new GetCollection()
+    ],
     normalizationContext: ['groups' => ['application:read']],
 )]
 class Application implements UserInterface
@@ -29,6 +34,13 @@ class Application implements UserInterface
 
     #[ORM\Column(length: 255, unique: true, nullable: true)]
     private ?string $token = null;
+
+    /**
+     * @var array<int,string>
+     */
+    #[ORM\Column]
+    #[Groups(['application:read'])]
+    private array $roles = [];
 
     #[ORM\ManyToOne(inversedBy: 'applications')]
     #[ORM\JoinColumn(nullable: false)]
@@ -117,10 +129,21 @@ class Application implements UserInterface
 
     public function getRoles(): array
     {
+        $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_APPLICATION';
 
         return array_unique($roles);
+    }
+
+    /**
+     * @param array<int,string> $roles
+     */
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 
     public function getUserIdentifier(): string
