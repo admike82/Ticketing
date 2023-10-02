@@ -9,7 +9,7 @@
 					
 					<p>
 					{% if application.token %}
-						{{ application.token }}
+					<strong class="text-green-700">Token OK</strong>
 					{% else %}
 						<a href="{{ path('app_dashboard_applications_genToken', {'id': application.id}) }}">Générer un token</a>
 					{% endif %}

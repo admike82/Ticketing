@@ -2,27 +2,23 @@
 
 {% block body %}
 
-	<div
-		class="min-h-full">
-		{# navbar #}
-		{{ component('NavbarComponent') }}
-		{% for message in app.flashes('success') %}
-			<div class="alert-success">
-				{{ message | nl2br }}
-			</div>
-		{% endfor %}
-		{% for message in app.flashes('danger') %}
-			<div class="alert-danger">
-				{{ message | nl2br }}
-			</div>
-		{% endfor %}
+	{# navbar #}
+	{{ component('NavbarComponent') }}
+	{% for message in app.flashes('success') %}
+		<div class="alert-success">
+			{{ message | nl2br }}
+		</div>
+	{% endfor %}
+	{% for message in app.flashes('danger') %}
+		<div class="alert-danger">
+			{{ message | nl2br }}
+		</div>
+	{% endfor %}
 
-		<main class="py-6 sm:px-6 lg:px-8">
-			<div class="dashboard-content">
-				{% block content %}{% endblock %}
-			</div>
-		</main>
+	<main class="h-full">
+		<div class="dashboard-content">
+			{% block content %}{% endblock %}
+		</div>
+	</main>
 
-		<div>
-
-		{% endblock %}
+{% endblock %}

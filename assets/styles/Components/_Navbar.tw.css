@@ -66,7 +66,7 @@
             }
           }
           &:hover .subMenu {
-            @apply block;
+            @apply block z-10;
           }
         }
       }

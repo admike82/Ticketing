@@ -1,11 +1,11 @@
 <article class="ticket">
+	<span style="--bg-color: {{ticket.level.color}};">{{ticket.level.name}}</span>
 	<h5>{{ticket.subject }}</h5>
 	<small>{{ticket.author ?? (ticket.userAccount.firstName ~ ' ' ~ ticket.userAccount.name) }}</small>
-	<div>
-		<span style="--bg-color: {{ticket.status.color}};">{{ticket.status.name}}</span>
-		<span style="--bg-color: {{ticket.level.color}};">{{ticket.level.name}}</span>
-		<p>
-			{{ticket.content | nl2br}}
-		</p>
-	</div>
+	<p>
+		{{ticket.content | nl2br}}
+	</p>
+	{# <div>
+				<span style="--bg-color: {{ticket.status.color}};">{{ticket.status.name}}</span>
+			</div> #}
 </article>

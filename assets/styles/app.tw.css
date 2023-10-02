@@ -11,7 +11,7 @@
     dark:bg-neutral-700
     text-gray-900
     dark:text-neutral-200
-    h-full;
+    min-h-screen;
   }
 
   .alert-success, .alert-danger {
@@ -29,19 +29,25 @@
   @import "./Components/_Ticket.tw.css";
   @import "./Components/_Navbar.tw.css";
   @import "./Components/_Tabs.tw.css";
+  @import "./Components/_Form.tw.css";
 
   @import "./Layouts/_Dashboard.tw.css";
   @import "./Layouts/_Login.tw.css";
 }
-/* .dropdown {
-  position: relative;
-  display: inline-block;
-} */
 
-/* .dropdown-content {
-  display: none;
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: 
+    "nav" 
+    "main" 
+    "footer"; 
 }
 
-.dropdown:hover .dropdown-content {
-  display: block;
-} */
+nav {
+  grid-area: nav;
+}
+
+main {
+  grid-area: main;
+}

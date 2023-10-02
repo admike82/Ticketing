@@ -1,49 +1,72 @@
+.ticket:nth-child(1) {
+  @apply rounded-t-lg;
+}
+
+.ticket:last-child {
+  @apply rounded-b-lg;
+}
+
 .ticket {
-  @apply block 
-  rounded-lg 
+  @apply 
   bg-neutral-100  
-  !text-neutral-800
+  !text-gray-800
   dark:!text-neutral-800
   dark:bg-neutral-200
-  w-[340px]
-  p-6 
+  border
+  border-gray-300
+  py-3
+  px-4
   shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)];
-
+  & span {
+    @apply relative 
+    block
+    px-[0.65em] 
+    pb-[0.25em] 
+    pt-[0.35em] 
+    ml-[0.5rem]
+    text-left 
+    /* text-[0.75em]  */
+    font-bold 
+    text-[var(--bg-color)]
+    leading-none
+    before:absolute 
+    before:left-[-0.5rem] 
+    before:w-[1rem] 
+    before:h-[1rem] 
+    before:rounded-full 
+    before:bg-[var(--bg-color)];
+  }
   & h5 {
-    @apply text-xl 
+    @apply text-3xl 
     font-medium 
     leading-tight;
   }
-
-  & article {
+  & small {
+    @apply italic;
+  }
+  & p {
+    @apply 
+    h-0
+    m-0
+    overflow-hidden
+    scale-y-0
+    transition-all
+    duration-[350ms]
+    ease-in-out
+    text-base 
+    text-neutral-800;
+  }
+  &:hover p {
+    @apply 
+    h-auto
+    scale-y-100 
+    overflow-hidden
+    my-4 ;
+  }
+  /* & article {
     @apply mt-2 
     grid 
     grid-cols-2 
     gap-1.5;
-
-    & span {
-      @apply relative 
-      block
-      px-[0.65em] 
-      pb-[0.25em] 
-      pt-[0.35em] 
-      ml-[0.5rem]
-      text-left 
-      text-[0.75em] 
-      font-bold 
-      leading-none
-      before:absolute 
-      before:left-[-0.5rem] 
-      before:w-[0.75rem] 
-      before:h-[0.75rem] 
-      before:rounded-full 
-      before:bg-[var(--bg-color)];
-    }
-    & p {
-      @apply col-span-2 
-      mb-4 
-      text-base 
-      text-neutral-600;
-    }
-  }
+  } */
 }
