@@ -1,21 +1,24 @@
 {% extends 'dashboardLaoyout.html.twig' %}
 
 {% block content %}
+	<section class="dashboard-content">
 		{% for application in applications %}
 			<article class="ticket">
 				<h5>{{ application.name }}</h5>
 				<div>
-					<span >{{ application.userAccount.name }} {{ application.userAccount.firstName }}</span>
-					
+					<span>{{ application.userAccount.name }}
+						{{ application.userAccount.firstName }}</span>
+
 					<p>
-					{% if application.token %}
-					<strong class="text-green-700">Token OK</strong>
-					{% else %}
-						<a href="{{ path('app_dashboard_applications_genToken', {'id': application.id}) }}">Générer un token</a>
-					{% endif %}
+						{% if application.token %}
+							<strong class="text-green-700">Token OK</strong>
+						{% else %}
+							<a href="{{ path('app_dashboard_applications_genToken', {'id': application.id}) }}">Générer un token</a>
+						{% endif %}
 					</p>
 				</div>
 			</article>
 		{% endfor %}
 		<a href={{ path("app_dashboard_applications_add")}}>Ajouter une app</a>
+	</section>
 {% endblock %}

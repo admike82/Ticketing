@@ -1,8 +1,8 @@
-.ticket:nth-child(1) {
+.ticket:first-of-type {
   @apply rounded-t-lg;
 }
 
-.ticket:last-child {
+.ticket:last-of-type {
   @apply rounded-b-lg;
 }
 
@@ -25,7 +25,6 @@
     pt-[0.35em] 
     ml-[0.5rem]
     text-left 
-    /* text-[0.75em]  */
     font-bold 
     text-[var(--bg-color)]
     leading-none

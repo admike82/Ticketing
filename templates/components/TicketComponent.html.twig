@@ -1,5 +1,6 @@
 <article class="ticket">
 	<span style="--bg-color: {{ticket.level.color}};">{{ticket.level.name}}</span>
+	<span style="--bg-color: {{ticket.status.color}};">{{ticket.status.name}}</span>
 	<h5>{{ticket.subject }}</h5>
 	<small>{{ticket.author ?? (ticket.userAccount.firstName ~ ' ' ~ ticket.userAccount.name) }}</small>
 	<p>

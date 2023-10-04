@@ -1,3 +1,43 @@
 .dashboard-content {
-  @apply w-full h-full m-3;
+  @apply m-4;
+  & h1 {
+    @apply text-4xl text-center font-bold;
+  }
+  & h2 {
+    @apply text-2xl text-center my-3 font-bold;
+  }
+  & hr {
+    @apply my-4 dark:border-neutral-300 border-neutral-700;
+  }
+
+  & section {
+    @apply flex gap-6 flex-wrap justify-center;
+    & article {
+      @apply border 
+      rounded-md
+      flex
+      flex-col
+      justify-center
+      items-center
+      gap-6
+      h-[120px]
+      w-[150px]
+      dark:border-neutral-300 
+      border-neutral-700 
+      bg-neutral-100  
+      !text-gray-700
+      dark:!text-neutral-700
+      dark:bg-neutral-200
+      shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)];
+      & h3 {
+        @apply 
+        /* text-[var(--text-color)]  */
+        font-bold 
+        text-xl;
+      }
+      & span {
+        @apply text-xl font-bold bg-[var(--bg-color)] rounded-lg py-1 px-6 text-neutral-200;
+      }
+    }
+  }
 }

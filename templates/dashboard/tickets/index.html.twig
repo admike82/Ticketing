@@ -5,8 +5,9 @@
 
 {% block content %}
 	<section class="dashboard-content">
+		<a href="{{ path('app_dashboard') }}" class="btn">Retour au tableau de bord</a>
 		{% for ticket in tickets %}
-            {{ component('TicketComponent', {'ticket': ticket}) }}
+			{{ component('TicketComponent', {'ticket': ticket}) }}
 		{% endfor %}
 	</section>
 {% endblock %}
