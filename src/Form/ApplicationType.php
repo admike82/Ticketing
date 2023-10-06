@@ -14,7 +14,7 @@ class ApplicationType extends AbstractType
     {
         $builder
             ->add('name', options: ['label' => 'Nom de l\'application'])
-            ->add('enregistrer', SubmitType::class);
+            ->add('Enregistrer', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

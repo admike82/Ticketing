@@ -4,10 +4,16 @@
 
 @layer components {
   html {
-    @apply h-full box-border;
+    @apply h-full box-border bg-gray-800;
   }
   body {
-    @apply bg-neutral-200
+    @apply bg-neutral-50
+    m-auto
+    max-w-[540px]
+    md:max-w-[720px]
+    lg:max-w-[960px]
+    xl:max-w-[1140px]
+    2xl:max-w-[1320px]
     dark:bg-neutral-700
     text-gray-900
     dark:text-neutral-200
@@ -50,6 +56,7 @@
   @import "./Components/_Navbar.tw.css";
   @import "./Components/_Tabs.tw.css";
   @import "./Components/_Form.tw.css";
+  @import "./Components/_Response.tw.css";
 
   @import "./Layouts/_Dashboard.tw.css";
   @import "./Layouts/_Login.tw.css";

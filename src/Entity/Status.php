@@ -36,6 +36,9 @@ class Status
     #[ORM\OneToMany(mappedBy: 'status', targetEntity: Ticket::class)]
     private Collection $tickets;
 
+    #[ORM\Column]
+    private ?bool $close = null;
+
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
@@ -96,6 +99,18 @@ class Status
                 $ticket->setStatus(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isClose(): ?bool
+    {
+        return $this->close;
+    }
+
+    public function setClose(bool $close): static
+    {
+        $this->close = $close;
 
         return $this;
     }

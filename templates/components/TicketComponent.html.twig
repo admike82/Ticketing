@@ -3,10 +3,13 @@
 	<span style="--bg-color: {{ticket.status.color}};">{{ticket.status.name}}</span>
 	<h5>{{ticket.subject }}</h5>
 	<small>{{ticket.author ?? (ticket.userAccount.firstName ~ ' ' ~ ticket.userAccount.name) }}</small>
-	<p>
-		{{ticket.content | nl2br}}
-	</p>
-	{# <div>
-				<span style="--bg-color: {{ticket.status.color}};">{{ticket.status.name}}</span>
-			</div> #}
-</article>
+	<strong>
+		<img src="/images/Shape.png" alt="shape"/>
+	</svg>
+	{{ticket.responses | length}}</strong>
+<p>
+	{{ticket.content | nl2br}}
+</p>
+<p class="flex justify-center">
+	<a href="{{ path('app_dashboard_responses', {id: ticket.id}) }}" class="btn">Répondre</a>
+</p></article>

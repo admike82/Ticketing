@@ -7,6 +7,8 @@ use App\Entity\Status;
 use App\Entity\UserAccount;
 use App\Repository\TicketRepository;
 use App\Repository\ApplicationRepository;
+use App\Repository\StatusRepository;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
@@ -54,18 +56,25 @@ class TicketsController extends AbstractController
     }
 
     #[Route('/dashboard/tickets/levels/{id}', name: 'app_dashboard_tickets_levels')]
-    public function levels(Level $level, #[CurrentUser] ?UserAccount $user, TicketRepository $ticketRepository, ApplicationRepository $applicationRepository)
+    public function levels(Level $level, #[CurrentUser] ?UserAccount $user,StatusRepository $statusRepository, TicketRepository $ticketRepository, ApplicationRepository $applicationRepository)
     {
         if ($user === null) {
             return $this->redirectToRoute('app_login');
         }
+        $statusExculde = $statusRepository->findBy(['close' => true]);
         if (in_array('ROLE_ADMIN', $user->getRoles())) {
-            $tickets = $ticketRepository->findBy(['level' => $level, 'status' => [1, 2]]);
+            $criteriaAdmin = Criteria::create()
+                ->andWhere(Criteria::expr()->notIn('status', $statusExculde))
+                ->andWhere(Criteria::expr()->eq('level', $level));
+            $tickets = $ticketRepository->matching($criteriaAdmin);
         } else {
             $applications = $applicationRepository->findBy(['userAccount' => $user->getId()]);
-            $ticketsApp = $ticketRepository->findBy(['application' => $applications, 'level' => $level, 'status' => [1, 2]]);
-            $ticketsUser = $ticketRepository->findBy(['userAccount' => $user->getId(), 'level' => $level, 'status' => [1, 2]]);
-            $tickets = array_merge($ticketsApp, $ticketsUser);
+            $criteraUser = Criteria::create()
+                ->andWhere(Criteria::expr()->in('application', $applications))
+                ->orWhere(Criteria::expr()->eq('userAccount', $user))
+                ->andWhere(Criteria::expr()->notIn('status', $statusExculde))
+                ->andWhere(Criteria::expr()->eq('level', $level));
+            $tickets = $ticketRepository->matching($criteraUser);
         }
         return $this->render('dashboard/tickets/index.html.twig', [
             'tickets' => $tickets

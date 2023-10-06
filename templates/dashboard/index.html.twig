@@ -8,7 +8,7 @@
 		<h1>Tableau de bord</h1>
 		{# <h2>STATUS</h2> #}
 		<hr>
-		<section>
+		<section class="synthese">
 			{% for status in statuses|sort %}
 				<a href="{{ path('app_dashboard_tickets_statuses', {'id': status.id}) }}">
 					<article>
@@ -21,7 +21,7 @@
 		{# <h2>LEVELS</h2> #}
 		<hr>
 		<h2>Ne prends pas en compte les tickets cloturés</h2>
-		<section>
+		<section class="synthese">
 			{% for level in levels|sort %}
 				<a href="{{ path('app_dashboard_tickets_levels', {'id': level.id}) }}">
 				<article>

@@ -10,7 +10,7 @@
     @apply my-4 dark:border-neutral-300 border-neutral-700;
   }
 
-  & section {
+  & .synthese {
     @apply flex gap-6 flex-wrap justify-center;
     & article {
       @apply border 
