@@ -69,12 +69,12 @@ class TicketsController extends AbstractController
             $tickets = $ticketRepository->matching($criteriaAdmin);
         } else {
             $applications = $applicationRepository->findBy(['userAccount' => $user->getId()]);
-            $criteraUser = Criteria::create()
+            $criteriaUser = Criteria::create()
                 ->andWhere(Criteria::expr()->in('application', $applications))
                 ->orWhere(Criteria::expr()->eq('userAccount', $user))
                 ->andWhere(Criteria::expr()->notIn('status', $statusExculde))
                 ->andWhere(Criteria::expr()->eq('level', $level));
-            $tickets = $ticketRepository->matching($criteraUser);
+            $tickets = $ticketRepository->matching($criteriaUser);
         }
         return $this->render('dashboard/tickets/index.html.twig', [
             'tickets' => $tickets
