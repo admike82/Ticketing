@@ -1,0 +1,23 @@
+#ticket {
+  @apply flex flex-col items-center w-[350px] lg:w-[500px] m-auto mt-4;
+  & div {
+    @apply w-full;
+  }
+  & label {
+    @apply block mb-2 mt-4 text-indigo-700;
+  }
+  & select {
+    @apply p-2 border bg-white border-indigo-500 rounded-md w-full;
+  }
+  & input,
+  textarea {
+    @apply border border-indigo-500 rounded-md p-2 w-full;
+  }
+  & button {
+    @apply block 
+      btn
+      mt-4 
+      px-8  
+      m-auto;
+  }
+}

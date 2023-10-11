@@ -8,4 +8,5 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 class TicketComponent
 {
   public Ticket $ticket;
+  public bool $hidden = false;
 }

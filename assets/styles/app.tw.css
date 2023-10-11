@@ -57,6 +57,7 @@
   @import "./Components/_Tabs.tw.css";
   @import "./Components/_Form.tw.css";
   @import "./Components/_Response.tw.css";
+  @import "./Components/_FormTicket.tw.css";
 
   @import "./Layouts/_Dashboard.tw.css";
   @import "./Layouts/_Login.tw.css";

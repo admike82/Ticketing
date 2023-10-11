@@ -8,19 +8,7 @@
 		<a href="{{ path('app_dashboard') }}" class="btn">Retour au tableau de bord</a>
 		<div class="responses-layout">
 			<div>
-				<article class="ticket">
-					<span style="--bg-color: {{ticket.level.color}};">{{ticket.level.name}}</span>
-					<span style="--bg-color: {{ticket.status.color}};">{{ticket.status.name}}</span>
-					<h5>{{ticket.subject }}</h5>
-					<small>{{ticket.author ?? (ticket.userAccount.firstName ~ ' ' ~ ticket.userAccount.name) }}</small>
-					<strong>
-						<img src="/images/Shape.png" alt="shape"/>
-						{{ticket.responses | length}}
-					</strong>
-					<p>
-						{{ticket.content | nl2br}}
-					</p>
-				</article>
+				{{ component('TicketComponent', {'ticket': ticket}) }}
 			</div>
 			<div class="responses-content">
 				<section class="responses">

@@ -36,15 +36,25 @@
     before:bg-[var(--bg-color)];
   }
   & h5 {
-    @apply text-3xl 
-    font-medium 
-    leading-tight;
+    @apply text-3xl;
+  }
+  & h6 {
+    @apply text-2xl
+    font-bold
+    text-indigo-700;
   }
   & small {
     @apply italic;
   }
   & p {
     @apply 
+    h-auto
+    my-4
+    text-base 
+    text-neutral-800;
+  }
+  &.dropdown-ticket p {
+    @apply
     h-0
     m-0
     overflow-hidden
@@ -52,15 +62,12 @@
     transition-all
     duration-[350ms]
     ease-in-out
-    text-base 
-    text-neutral-800;
   }
-  &:hover p {
+  &.dropdown-ticket:hover p {
     @apply 
     h-auto
     scale-y-100 
-    overflow-hidden
-    my-4 ;
+    overflow-hidden ;
   }
   /* & article {
     @apply mt-2 
