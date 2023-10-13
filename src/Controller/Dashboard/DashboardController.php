@@ -3,18 +3,23 @@
 namespace App\Controller\Dashboard;
 
 use App\Entity\UserAccount;
-use App\Repository\ApplicationRepository;
 use App\Repository\LevelRepository;
 use App\Repository\StatusRepository;
 use App\Repository\TicketRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ApplicationRepository;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DashboardController extends AbstractController
 
 {
+    public function __construct(private readonly Security $security)
+    {
+    }
+    
     #[Route('/dashboard', name: 'app_dashboard')]
     public function index(#[CurrentUser] ?UserAccount $user, TicketRepository $ticketRepository, LevelRepository $levelRepo, StatusRepository $statusRepository, ApplicationRepository $applicationRepository): Response
     {
@@ -23,7 +28,7 @@ class DashboardController extends AbstractController
         if ($user === null) {
             return $this->redirectToRoute('app_login');
         }
-        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             $tickets = $ticketRepository->findAll();
         } else {
             $applications = $applicationRepository->findBy(['userAccount' => $user->getId()]);

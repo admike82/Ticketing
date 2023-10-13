@@ -1,0 +1,15 @@
+table {
+  @apply table-auto border-collapse border-indigo-700 w-full;
+  & tr {
+    @apply border-y;
+  }
+  & th {
+    @apply bg-indigo-500 text-left text-neutral-200;
+  }
+  & td, th {
+    @apply p-2;
+  }
+  & .bg-color-perso {
+    @apply bg-[var(--bg-color)];
+  }
+}

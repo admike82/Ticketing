@@ -1,0 +1,35 @@
+{% extends 'dashboardLaoyout.html.twig' %}
+
+{% block title %}Admin - Utilisateurs
+{% endblock %}
+
+{% block content %}
+	<div class="dashboard-content">
+		<section class="flex justify-between">
+			<a href="{{ path('app_admin') }}" class="btn">Retour à l'administration</a>
+			<h1>Gestion des utilisateurs</h1>
+			<a href="{{ path('app_admin_user_create') }}" class="btn">Créer un utilisateur</a>
+		</section>
+		<hr>
+		<table>
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Prénom</th>
+					<th>Roles</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for user in users %}
+					<tr>
+						<td>{{ user.name }}</td>
+						<td>{{ user.firstName }}</td>
+						<td>{{ user.roles | join(', ')}}</td>
+						<td>Actions</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

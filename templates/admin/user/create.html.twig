@@ -1,0 +1,15 @@
+{% extends 'dashboardLaoyout.html.twig' %}
+
+{% block title %}Admin - Utilisateur
+{% endblock %}
+
+{% block content %}
+	<div class="dashboard-content">
+		<section class="flex justify-between">
+			<a href="{{ path('app_admin_user') }}" class="btn">Liste des utilisateurs</a>
+			<h1>Création d'un utilisateur</h1>
+		</section>
+		<hr>
+		{{ form(form) }}
+		</div>
+	{% endblock %}

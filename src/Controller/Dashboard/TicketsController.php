@@ -12,6 +12,7 @@ use App\Repository\TicketRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ApplicationRepository;
 use Doctrine\Common\Collections\Criteria;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,13 +21,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TicketsController extends AbstractController
 {
+    public function __construct(private readonly Security $security)
+    {
+    }
+    
     #[Route('/dashboard/tickets', name: 'app_dashboard_tickets')]
     public function index(#[CurrentUser] ?UserAccount $user, TicketRepository $ticketRepository, ApplicationRepository $applicationRepository): Response
     {
         if ($user === null) {
             return $this->redirectToRoute('app_login');
         }
-        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             $tickets = $ticketRepository->findAll();
         } else {
             $applications = $applicationRepository->findBy(['userAccount' => $user->getId()]);
@@ -67,7 +72,7 @@ class TicketsController extends AbstractController
         if ($user === null) {
             return $this->redirectToRoute('app_login');
         }
-        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             $tickets = $ticketRepository->findBy(['status' => $status]);
         } else {
             $applications = $applicationRepository->findBy(['userAccount' => $user->getId()]);
@@ -87,7 +92,7 @@ class TicketsController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         $statusExculde = $statusRepository->findBy(['close' => true]);
-        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             $criteriaAdmin = Criteria::create()
                 ->andWhere(Criteria::expr()->notIn('status', $statusExculde))
                 ->andWhere(Criteria::expr()->eq('level', $level));

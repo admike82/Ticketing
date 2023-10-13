@@ -29,7 +29,7 @@ class TicketType extends AbstractType
                 'class' => Application::class,
                 'choice_label' => 'name',
                 'query_builder' => function (ApplicationRepository $repo) use ($user) {
-                    if (in_array('ROLE_ADMIN', $user->getRoles())) {
+                    if ($this->security->isGranted('ROLE_ADMIN')) {
                         return $repo->createQueryBuilder('a');
                     }
                     return $repo->createQueryBuilder('a')

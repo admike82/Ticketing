@@ -46,6 +46,12 @@
   & small {
     @apply italic;
   }
+  & .info-responses {
+    @apply flex items-center gap-1;
+    & img {
+      @apply h-4;
+    }
+  }
   & p {
     @apply 
     h-auto

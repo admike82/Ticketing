@@ -2,6 +2,7 @@
 
 {% block content %}
 	<section class="dashboard-content">
+		<a href="{{ path('app_dashboard') }}" class="btn">Retour au tableau de bord</a>
 		{% for application in applications %}
 			<article class="ticket">
 				<h5>{{ application.name }}</h5>
@@ -19,6 +20,6 @@
 				</div>
 			</article>
 		{% endfor %}
-		<a href={{ path("app_dashboard_applications_add")}}>Ajouter une app</a>
+		<a href={{ path("app_dashboard_applications_add")}} class="btn block w-fit m-auto mt-4">Ajouter une app</a>
 	</section>
 {% endblock %}

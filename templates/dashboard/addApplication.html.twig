@@ -1,7 +1,12 @@
 {% extends 'dashboardLaoyout.html.twig' %}
 
 {% block content %}
-	<div class="form">
-		{{ form(form) }}
-		</div>
+
+	<section class="dashboard-content">
+		<a href="{{ path('app_dashboard_applications') }}" class="btn">Retour aux applications</a>
+
+		<div class="form">
+			{{ form(form) }}
+			</div>
+		</section>
 	{% endblock %}

@@ -7,7 +7,7 @@
 		{% if ticket.status.close %}
 			<span class="text-green-700 font-bold">Clos</span>
 		{% else %}
-		<a href="{{ path('app_dashboard_tickets_close', {id: ticket.id}) }}" class="btn">Cloturer</a>
+			<a href="{{ path('app_dashboard_tickets_close', {id: ticket.id}) }}" class="btn">Cloturer</a>
 		{% endif %}
 	</div>
 	<h5>{{ticket.subject }}</h5>
@@ -15,15 +15,16 @@
 		<h6>{{ticket.application.name}}</h6>
 	{% endif %}
 	<small>{{ticket.author ?? (ticket.userAccount.firstName ~ ' ' ~ ticket.userAccount.name) }}</small>
-	<strong>
+	<strong class="info-responses">
+		{{ticket.responses | length}}
 		<img src="/images/Shape.png" alt="shape"/>
-	</svg>
-	{{ticket.responses | length}}</strong>
-<p>
-	{{ticket.content | nl2br}}
-</p>
-{% if hidden %}
-	<p class="flex justify-center !mt-2">
-		<a href="{{ path('app_dashboard_responses', {id: ticket.id}) }}" class="btn">Répondre</a>
+	</strong>
+	<p>
+		{{ticket.content | nl2br}}
 	</p>
-{% endif %}</article>
+	{% if hidden %}
+		<p class="flex justify-center !mt-2">
+			<a href="{{ path('app_dashboard_responses', {id: ticket.id}) }}" class="btn">Répondre</a>
+		</p>
+	{% endif %}
+</article>

@@ -11,16 +11,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 
 class ApplicationController extends AbstractController
 {
+    public function __construct(private readonly Security $security)
+    {
+    }
+    
     #[Route('/dashboard/applications', name: 'app_dashboard_applications')]
     public function index(#[CurrentUser] ?UserAccount $user, ApplicationRepository $applicationRepository)
     {
         if ($user === null) {
             return $this->redirectToRoute('app_login');
         }
-        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             $applications = $applicationRepository->findAll();
         } else {
             $applications = $applicationRepository->findBy(['userAccount' => $user->getId()]);
@@ -55,7 +60,7 @@ class ApplicationController extends AbstractController
     #[Route('/dashboard/applications/genToken/{id}', name: 'app_dashboard_applications_genToken')]
     public function genToken(Application $application, #[CurrentUser] ?UserAccount $user, EntityManagerInterface $em)
     {
-        if ($application->getUserAccount() !== $user && !in_array('ROLE_ADMIN', $user->getRoles())) {
+        if ($application->getUserAccount() !== $user && !$this->security->isGranted('ROLE_ADMIN')) {
             $this->addFlash('danger', "l'application en vous appartient pas !");
             return $this->redirectToRoute("app_dashboard_applications");
         }
@@ -69,7 +74,7 @@ class ApplicationController extends AbstractController
         }
         //crypter le token
         $salt = $this->getParameter('app.security.salt');
-        $token = crypt($tokenPlain, $salt); 
+        $token = crypt($tokenPlain, $salt);
 
         $application->setToken($token);
         $em->persist($application);

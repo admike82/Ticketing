@@ -7,15 +7,12 @@
   items-center
   flex-col;
   & input {
-    @apply block my-2 text-neutral-800 rounded-md px-2 py-1;
+    @apply block my-2 border border-indigo-800 text-neutral-800 rounded-md px-2 py-1;
   }
   & label {
-    @apply block;
+    @apply block text-indigo-700 dark:text-neutral-200;
   }
   & button {
-    @apply border dark:border-neutral-300 border-neutral-800 rounded-md px-2 py-1;
-    &:hover {
-      @apply bg-neutral-800 text-neutral-300 dark:bg-neutral-300 dark:text-neutral-800;
-    }
+    @apply btn block w-fit m-auto mt-4;
   }
 }
