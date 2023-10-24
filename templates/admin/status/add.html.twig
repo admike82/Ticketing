@@ -1,0 +1,16 @@
+{% extends 'dashboardLaoyout.html.twig' %}
+
+{% block title %}Admin - status
+{% endblock %}
+
+{% block content %}
+	<div class="dashboard-content">
+		<section class="flex justify-between">
+			<a href="{{ path('app_admin_status') }}" class="btn">Retour à la liste des status</a>
+			<h1>Ajouter un statu</h1>
+			{# <a href="#" class="btn">Créer un Status</a> #}
+		</section>
+		<hr>
+    {{ form(form) }}
+	</div>
+{% endblock %}

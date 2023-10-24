@@ -1,6 +1,6 @@
 {% extends 'dashboardLaoyout.html.twig' %}
 
-{% block title %}Admin - Utilisateurs
+{% block title %}Admin - Status
 {% endblock %}
 
 {% block content %}
@@ -8,12 +8,13 @@
 		<section class="flex justify-between">
 			<a href="{{ path('app_admin') }}" class="btn">Retour à l'administration</a>
 			<h1>Gestion des status</h1>
-			<a href="#" class="btn">Créer un Status</a>
+			<a href="{{path('app_admin_status_add')}}" class="btn">Créer un Status</a>
 		</section>
 		<hr>
 		<table>
 			<thead>
 				<tr>
+					<th>Clos</th>
 					<th>Nom</th>
 					<th>Couleur</th>
 					<th>Actions</th>
@@ -22,6 +23,9 @@
 			<tbody>
 				{% for status in statuses %}
 					<tr>
+						<td>{% if status.close %}
+							<img class="h-4 m-auto" src="{{ asset('images/check.svg') }}" alt="check">
+						{% endif %}</td>
 						<td>{{ status.name }}</td>
 						<td style="--bg-color: {{status.color}};" class="bg-color-perso">{{ status.color}}</td>
 						<td>Actions</td>

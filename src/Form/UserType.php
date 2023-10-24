@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\UserAccount;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -42,6 +43,15 @@ class UserType extends AbstractType
                     'required' => true
                 ]
             )
+            ->add('roles', ChoiceType::class, options: [
+                'label' => 'Roles',
+                'required' => false,
+                'choices' => [
+                    'Admin' => 'ROLE_ADMIN',
+                    'User' => 'ROLE_USER',
+                ],
+                'multiple' => true,
+                ])
             ->add('Enregistrer', SubmitType::class);
     }
 

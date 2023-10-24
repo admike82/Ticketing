@@ -4,19 +4,20 @@
 
 	{# navbar #}
 	{{ component('NavbarComponent') }}
-	{% for message in app.flashes('success') %}
-		<div class="alert-success">
-			{{ message | nl2br }}
-		</div>
-	{% endfor %}
-	{% for message in app.flashes('danger') %}
-		<div class="alert-danger">
-			{{ message | nl2br }}
-		</div>
-	{% endfor %}
+
 
 	<main class="h-full">
-			{% block content %}{% endblock %}
+		{% for message in app.flashes('success') %}
+			<div class="alert-success">
+				{{ message | nl2br }}
+			</div>
+		{% endfor %}
+		{% for message in app.flashes('danger') %}
+			<div class="alert-danger">
+				{{ message | nl2br }}
+			</div>
+		{% endfor %}
+		{% block content %}{% endblock %}
 	</main>
 
 {% endblock %}

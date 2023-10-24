@@ -42,6 +42,7 @@ class UserController extends AbstractController
             $user->eraseCredentials();
             $em->persist($user);
             $em->flush();
+            $this->addFlash('success', "L'utilisateur a bien été crée !");
             return $this->redirectToRoute('app_admin_user');
         }
 

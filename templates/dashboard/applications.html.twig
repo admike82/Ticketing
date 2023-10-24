@@ -3,20 +3,18 @@
 {% block content %}
 	<section class="dashboard-content">
 		<a href="{{ path('app_dashboard') }}" class="btn">Retour au tableau de bord</a>
-		{% for application in applications %}
-			<article class="ticket">
+		{% for application in applications | sort((a, b) => a.name|lower <=> b.name|lower) %}
+			<article class="application">
 				<h5>{{ application.name }}</h5>
 				<div>
 					<span>{{ application.userAccount.name }}
 						{{ application.userAccount.firstName }}</span>
-
-					<p>
-						{% if application.token %}
-							<strong class="text-green-700">Token OK</strong>
-						{% else %}
-							<a href="{{ path('app_dashboard_applications_genToken', {'id': application.id}) }}">Générer un token</a>
-						{% endif %}
-					</p>
+					{% if application.token %}
+						<strong>Token OK</strong>
+						<a href="{{ path('app_dashboard_applications_genToken', {'id': application.id}) }}">Regénérer un token</a>
+					{% else %}
+						<a href="{{ path('app_dashboard_applications_genToken', {'id': application.id}) }}">Générer un token</a>
+					{% endif %}
 				</div>
 			</article>
 		{% endfor %}

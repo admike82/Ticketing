@@ -1,0 +1,16 @@
+{% extends 'dashboardLaoyout.html.twig' %}
+
+{% block title %}Admin - Utilisateurs
+{% endblock %}
+
+{% block content %}
+	<div class="dashboard-content">
+		<section class="flex justify-between">
+			<a href="{{ path('app_admin_levels') }}" class="btn">Retour à liste des levels</a>
+			<h1>Ajout d'un level</h1>
+			{# <a href="#" class="btn">Créer un level</a> #}
+		</section>
+		<hr>
+    {{ form(form) }}
+	</div>
+{% endblock %}
