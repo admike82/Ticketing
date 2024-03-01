@@ -24,10 +24,13 @@ class TicketsController extends AbstractController
     public function __construct(private readonly Security $security)
     {
     }
-    
+
     #[Route('/dashboard/tickets', name: 'app_dashboard_tickets')]
-    public function index(#[CurrentUser] ?UserAccount $user, TicketRepository $ticketRepository, ApplicationRepository $applicationRepository): Response
-    {
+    public function index(
+        #[CurrentUser] ?UserAccount $user,
+        TicketRepository $ticketRepository,
+        ApplicationRepository $applicationRepository
+    ): Response {
         if ($user === null) {
             return $this->redirectToRoute('app_login');
         }
@@ -46,8 +49,12 @@ class TicketsController extends AbstractController
     }
 
     #[Route('/dashboard/tickets/create', name: 'app_dashboard_tickets_create')]
-    public function create(Request $request, #[CurrentUser] ?UserAccount $user, EntityManagerInterface $em, StatusRepository $statusRepository)
-    {
+    public function create(
+        Request $request,
+        #[CurrentUser] ?UserAccount $user,
+        EntityManagerInterface $em,
+        StatusRepository $statusRepository
+    ) {
         $newTicket = new Ticket();
         $form = $this->createForm(TicketType::class, $newTicket);
 
@@ -67,8 +74,12 @@ class TicketsController extends AbstractController
     }
 
     #[Route('/dashboard/tickets/statuses/{id}', name: 'app_dashboard_tickets_statuses')]
-    public function statuses(Status $status, #[CurrentUser] ?UserAccount $user, TicketRepository $ticketRepository, ApplicationRepository $applicationRepository)
-    {
+    public function statuses(
+        Status $status,
+        #[CurrentUser] ?UserAccount $user,
+        TicketRepository $ticketRepository,
+        ApplicationRepository $applicationRepository
+    ) {
         if ($user === null) {
             return $this->redirectToRoute('app_login');
         }
@@ -86,8 +97,13 @@ class TicketsController extends AbstractController
     }
 
     #[Route('/dashboard/tickets/levels/{id}', name: 'app_dashboard_tickets_levels')]
-    public function levels(Level $level, #[CurrentUser] ?UserAccount $user, StatusRepository $statusRepository, TicketRepository $ticketRepository, ApplicationRepository $applicationRepository)
-    {
+    public function levels(
+        Level $level,
+        #[CurrentUser] ?UserAccount $user,
+        StatusRepository $statusRepository,
+        TicketRepository $ticketRepository,
+        ApplicationRepository $applicationRepository
+    ) {
         if ($user === null) {
             return $this->redirectToRoute('app_login');
         }
@@ -112,8 +128,11 @@ class TicketsController extends AbstractController
     }
 
     #[Route('/dashboard/tickets/close/{id}', name: 'app_dashboard_tickets_close')]
-    public function close(Ticket $ticket, EntityManagerInterface $em, StatusRepository $statusRepository)
-    {
+    public function close(
+        Ticket $ticket,
+        EntityManagerInterface $em,
+        StatusRepository $statusRepository
+    ) {
         $status = $statusRepository->findOneBy(['name' => 'Cloturés']);
         $ticket->setStatus($status);
         $em->flush();

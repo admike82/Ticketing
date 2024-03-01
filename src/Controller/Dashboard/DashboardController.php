@@ -19,10 +19,15 @@ class DashboardController extends AbstractController
     public function __construct(private readonly Security $security)
     {
     }
-    
+
     #[Route('/dashboard', name: 'app_dashboard')]
-    public function index(#[CurrentUser] ?UserAccount $user, TicketRepository $ticketRepository, LevelRepository $levelRepo, StatusRepository $statusRepository, ApplicationRepository $applicationRepository): Response
-    {
+    public function index(
+        #[CurrentUser] ?UserAccount $user,
+        TicketRepository $ticketRepository,
+        LevelRepository $levelRepo,
+        StatusRepository $statusRepository,
+        ApplicationRepository $applicationRepository
+    ): Response {
         $levels = $levelRepo->findAll();
         $statuses = $statusRepository->findAll();
         if ($user === null) {

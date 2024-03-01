@@ -17,13 +17,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ResponsesController extends AbstractController
 {
     #[Route('/dashboard/responses/{id}', name: 'app_dashboard_responses')]
-    public function index(Ticket $ticket, ResponseRepository $responseRepo, Request $request, #[CurrentUser] ?UserAccount $user, EntityManagerInterface $em): Response
-    {   
+    public function index(
+        Ticket $ticket,
+        ResponseRepository $responseRepo,
+        Request $request,
+        #[CurrentUser] ?UserAccount $user,
+        EntityManagerInterface $em
+    ): Response {
         $newResponse = new EntityResponse();
         $form = $this->createForm(ResponseType::class, $newResponse);
 
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $newResponse->setTicket($ticket);
             $newResponse->setUserAccount($user);

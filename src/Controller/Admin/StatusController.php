@@ -24,7 +24,10 @@ class StatusController extends AbstractController
     }
 
     #[Route('/admin/status/add', name: 'app_admin_status_add')]
-    public function add(Request $request, EntityManagerInterface $em): Response {
+    public function add(
+        Request $request,
+        EntityManagerInterface $em
+    ): Response {
 
         $status = new Status();
 
@@ -38,7 +41,7 @@ class StatusController extends AbstractController
             $this->addFlash('success', "Le statu a bien été crée !");
             return $this->redirectToRoute('app_admin_status');
         }
-        
+
 
         return $this->render('admin/status/add.html.twig', [
             'form' => $form->createView()

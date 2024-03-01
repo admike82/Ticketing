@@ -12,18 +12,20 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     #[Route('/', name: 'app_login')]
-    public function index(#[CurrentUser] ?UserAccount $user,AuthenticationUtils $authenticationUtils): Response
-    {
+    public function index(
+        #[CurrentUser] ?UserAccount $user,
+        AuthenticationUtils $authenticationUtils
+    ): Response {
         if ($user !== null) {
             return $this->redirectToRoute('app_dashboard');
         }
-		// get the login error if there is one
-		$error = $authenticationUtils->getLastAuthenticationError();
-	    // last username entered by the user
-	    $lastUsername = $authenticationUtils->getLastUsername();
-	    
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
         return $this->render('login/index.html.twig', [
-	        'last_username' => $lastUsername,
+            'last_username' => $lastUsername,
             'error'         => $error,
         ]);
     }

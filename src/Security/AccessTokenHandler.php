@@ -53,13 +53,18 @@ class AccessTokenHandler extends AbstractAuthenticator
     );
   }
 
-  public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
-  {
+  public function onAuthenticationSuccess(
+    Request $request,
+    TokenInterface $token,
+    string $firewallName
+  ): ?Response {
     return null;
   }
 
-  public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
-  {
+  public function onAuthenticationFailure(
+    Request $request,
+    AuthenticationException $exception
+  ): ?Response {
     $data = [
       'message' => strtr($exception->getMessageKey(), $exception->getMessageData())
     ];

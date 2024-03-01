@@ -18,8 +18,10 @@ final class UserPasswordHasher implements ProcessorInterface
      * @param ProcessorInterface<PersistProcessor> $processor
      * @param UserPasswordHasherInterface $passwordHasher
      */
-    public function __construct(private readonly ProcessorInterface $processor, private readonly UserPasswordHasherInterface $passwordHasher)
-    {
+    public function __construct(
+        private readonly ProcessorInterface $processor,
+        private readonly UserPasswordHasherInterface $passwordHasher
+    ) {
     }
 
     /**
@@ -29,8 +31,12 @@ final class UserPasswordHasher implements ProcessorInterface
      * @param array<string,mixed> $context
      * @return UserAccount
      */
-    public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
-    {
+    public function process(
+        $data,
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = []
+    ) {
         if (!$data->getPlainPassword()) {
             return $this->processor->process($data, $operation, $uriVariables, $context);
         }

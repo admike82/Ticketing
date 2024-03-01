@@ -18,10 +18,12 @@ class ApplicationController extends AbstractController
     public function __construct(private readonly Security $security)
     {
     }
-    
+
     #[Route('/dashboard/applications', name: 'app_dashboard_applications')]
-    public function index(#[CurrentUser] ?UserAccount $user, ApplicationRepository $applicationRepository)
-    {
+    public function index(
+        #[CurrentUser] ?UserAccount $user,
+        ApplicationRepository $applicationRepository
+    ) {
         if ($user === null) {
             return $this->redirectToRoute('app_login');
         }
@@ -36,8 +38,11 @@ class ApplicationController extends AbstractController
     }
 
     #[Route('/dashboard/applications/add', name: 'app_dashboard_applications_add')]
-    public function addApplications(Request $request, #[CurrentUser] ?UserAccount $user, EntityManagerInterface $em)
-    {
+    public function addApplications(
+        Request $request,
+        #[CurrentUser] ?UserAccount $user,
+        EntityManagerInterface $em
+    ) {
         $application = new Application();
 
         $form = $this->createForm(ApplicationType::class, $application);
@@ -58,8 +63,11 @@ class ApplicationController extends AbstractController
     }
 
     #[Route('/dashboard/applications/genToken/{id}', name: 'app_dashboard_applications_genToken')]
-    public function genToken(Application $application, #[CurrentUser] ?UserAccount $user, EntityManagerInterface $em)
-    {
+    public function genToken(
+        Application $application,
+        #[CurrentUser] ?UserAccount $user,
+        EntityManagerInterface $em
+    ) {
         if ($application->getUserAccount() !== $user && !$this->security->isGranted('ROLE_ADMIN')) {
             $this->addFlash('danger', "l'application en vous appartient pas !");
             return $this->redirectToRoute("app_dashboard_applications");

@@ -26,8 +26,11 @@ class UserController extends AbstractController
     }
 
     #[Route('/admin/user/create', name: 'app_admin_user_create')]
-    public function create(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher): Response
-    {
+    public function create(
+        Request $request,
+        EntityManagerInterface $em,
+        UserPasswordHasherInterface $passwordHasher
+    ): Response {
         $user = new UserAccount();
 
         $form = $this->createForm(UserType::class, $user);

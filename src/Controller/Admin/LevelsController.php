@@ -24,7 +24,10 @@ class LevelsController extends AbstractController
     }
 
     #[Route('/admin/levels/add', name: 'app_admin_levels_add')]
-    public function add(Request $request, EntityManagerInterface $em): Response {
+    public function add(
+        Request $request,
+        EntityManagerInterface $em
+    ): Response {
 
         $level = new Level();
 
@@ -38,7 +41,7 @@ class LevelsController extends AbstractController
             $this->addFlash('success', "Le level a bien été crée !");
             return $this->redirectToRoute('app_admin_levels');
         }
-        
+
 
         return $this->render('admin/levels/add.html.twig', [
             'form' => $form->createView()
