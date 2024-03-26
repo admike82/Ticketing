@@ -1,7 +1,7 @@
 .dashboard-content {
   @apply m-4;
   & h1 {
-    @apply text-4xl text-center font-bold;
+    @apply text-3xl text-center font-bold;
   }
   & h2 {
     @apply text-2xl text-center my-3 font-bold;
@@ -30,8 +30,7 @@
       dark:bg-neutral-200
       shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)];
       & h3 {
-        @apply 
-        /* text-[var(--text-color)]  */
+        @apply /* text-[var(--text-color)]  */
         font-bold 
         text-xl;
       }

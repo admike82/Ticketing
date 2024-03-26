@@ -9,9 +9,9 @@
 		<header>
 			<h2>Connexion</h2>
 		</header>
-	{% if error %}
-		<div class="text-center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-	{% endif %}
+		{% if error %}
+			<div class="text-center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+		{% endif %}
 
 		<section>
 			<form action="{{ path('app_login') }}" method="post">
@@ -22,9 +22,9 @@
 					</div>
 				</div>
 				<div>
-					<div class="flex items-center justify-between">
+					<div class="!flex !items-center !justify-between">
 						<label for="password">Mot de passe :</label>
-						<div class="text-sm">
+						<div class="text-sm !w-fit">
 							<a href="#" class="font-semibold text-indigo-400 hover:text-indigo-500">Mot de passe oublié ?</a>
 						</div>
 					</div>

@@ -20,10 +20,9 @@
     min-h-screen;
   }
 
-  button, .btn {
-    @apply 
-    inline-block
-    mb-4
+  button,
+  .btn {
+    @apply inline-block
     rounded-md 
     bg-indigo-600
     px-3 
@@ -40,12 +39,17 @@
     focus-visible:outline-indigo-600;
   }
 
-  .alert-success, .alert-danger {
+  .btn {
+    @apply mb-4;
+  }
+
+  .alert-success,
+  .alert-danger {
     @apply text-center font-bold text-lg m-1 p-2 rounded-lg;
   }
 
   .alert-success {
-    @apply text-green-800 bg-green-100
+    @apply text-green-800 bg-green-100;
   }
 
   .alert-danger {
@@ -55,9 +59,8 @@
   @import "./Components/_Ticket.tw.css";
   @import "./Components/_Navbar.tw.css";
   @import "./Components/_Tabs.tw.css";
-  @import "./Components/_Form.tw.css";
   @import "./Components/_Response.tw.css";
-  @import "./Components/_FormTicket.tw.css";
+  @import "./Components/_Form.tw.css";
   @import "./Components/_Table.tw.css";
   @import "./Components/_Application.tw.css";
 
@@ -68,10 +71,10 @@
 body {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  grid-template-areas: 
-    "nav" 
-    "main" 
-    "footer"; 
+  grid-template-areas:
+    "nav"
+    "main"
+    "footer";
 }
 
 nav {

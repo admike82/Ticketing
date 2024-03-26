@@ -23,9 +23,10 @@
 					{% endfor %}
 				</section>
 				<section class="form-response">
-					{{ form(form) }}
-					</section>
-				</div>
+					{{ form_start(form) }}
+					{{ form_end(form) }}
+				</section>
 			</div>
-		</section>
-	{% endblock %}
+		</div>
+	</section>
+{% endblock %}
