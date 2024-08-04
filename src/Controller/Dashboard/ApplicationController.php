@@ -7,11 +7,13 @@ use App\Entity\UserAccount;
 use App\Form\ApplicationType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ApplicationRepository;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\Response;
 
 class ApplicationController extends AbstractController
 {
@@ -23,7 +25,7 @@ class ApplicationController extends AbstractController
     public function index(
         #[CurrentUser] ?UserAccount $user,
         ApplicationRepository $applicationRepository
-    ) {
+    ): Response {
         if ($user === null) {
             return $this->redirectToRoute('app_login');
         }
@@ -42,7 +44,7 @@ class ApplicationController extends AbstractController
         Request $request,
         #[CurrentUser] ?UserAccount $user,
         EntityManagerInterface $em
-    ) {
+    ): Response|RedirectResponse {
         $application = new Application();
 
         $form = $this->createForm(ApplicationType::class, $application);
@@ -67,7 +69,7 @@ class ApplicationController extends AbstractController
         Application $application,
         #[CurrentUser] ?UserAccount $user,
         EntityManagerInterface $em
-    ) {
+    ): RedirectResponse {
         if ($application->getUserAccount() !== $user && !$this->security->isGranted('ROLE_ADMIN')) {
             $this->addFlash('danger', "l'application en vous appartient pas !");
             return $this->redirectToRoute("app_dashboard_applications");
