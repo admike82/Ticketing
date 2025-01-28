@@ -13,8 +13,7 @@ class AppFixtures extends Fixture
 {
     public function __construct(
         private PasswordHasherFactoryInterface $passwordHasherFactory,
-    ) {
-    }
+    ) {}
 
     public function load(ObjectManager $manager): void
     {
@@ -31,15 +30,15 @@ class AppFixtures extends Fixture
         $manager->persist($lowLevel);
 
         $newStatus = new Status();
-        $newStatus->setName("New")->setColor("#eb2f06");
+        $newStatus->setName("New")->setColor("#eb2f06")->setClose(false);
         $manager->persist($newStatus);
 
         $openStatus = new Status();
-        $openStatus->setName("Open")->setColor("#f6b93b");
+        $openStatus->setName("Open")->setColor("#f6b93b")->setClose(false);
         $manager->persist($openStatus);
 
         $closedStatus = new Status();
-        $closedStatus->setName("Closed")->setColor("#78e08f");
+        $closedStatus->setName("Closed")->setColor("#78e08f")->setClose(true);
         $manager->persist($closedStatus);
 
         $admin = new UserAccount();
