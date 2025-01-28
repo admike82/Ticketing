@@ -1,14 +1,14 @@
 {
     "devDependencies": {
-        "@babel/core": "^7.17.0",
-        "@symfony/webpack-encore": "^4.0.0",
-        "autoprefixer": "^10.4.15",
-        "core-js": "^3.23.0",
-        "postcss": "^8.4.30",
-        "postcss-loader": "^7.3.3",
-        "regenerator-runtime": "^0.13.9",
-        "tailwindcss": "^3.3.3",
-        "webpack": "^5.74.0",
+        "@babel/core": "^7.26.7",
+        "@symfony/webpack-encore": "^4.7.0",
+        "autoprefixer": "^10.4.20",
+        "core-js": "^3.40.0",
+        "postcss": "^8.5.1",
+        "postcss-loader": "^7.3.4",
+        "regenerator-runtime": "^0.13.11",
+        "tailwindcss": "^3.4.17",
+        "webpack": "^5.97.1",
         "webpack-cli": "^4.10.0",
         "webpack-notifier": "^1.15.0"
     },
