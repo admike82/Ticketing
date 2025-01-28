@@ -21,9 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TicketsController extends AbstractController
 {
-    public function __construct(private readonly Security $security)
-    {
-    }
+    public function __construct(private readonly Security $security) {}
 
     #[Route('/dashboard/tickets', name: 'app_dashboard_tickets')]
     public function index(
@@ -60,7 +58,7 @@ class TicketsController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $status = $statusRepository->findOneBy(['name' => 'Nouveaux']);
+            $status = $statusRepository->findOneBy(['name' => 'New']);
             $newTicket->setStatus($status);
             $newTicket->setUserAccount($user);
             $em->persist($newTicket);
@@ -107,10 +105,10 @@ class TicketsController extends AbstractController
         if ($user === null) {
             return $this->redirectToRoute('app_login');
         }
-        $statusExculde = $statusRepository->findBy(['close' => true]);
+        $statusExclude = $statusRepository->findBy(['close' => true]);
         if ($this->security->isGranted('ROLE_ADMIN')) {
             $criteriaAdmin = Criteria::create()
-                ->andWhere(Criteria::expr()->notIn('status', $statusExculde))
+                ->andWhere(Criteria::expr()->notIn('status', $statusExclude))
                 ->andWhere(Criteria::expr()->eq('level', $level));
             $tickets = $ticketRepository->matching($criteriaAdmin);
         } else {
@@ -118,7 +116,7 @@ class TicketsController extends AbstractController
             $criteriaUser = Criteria::create()
                 ->andWhere(Criteria::expr()->in('application', $applications))
                 ->orWhere(Criteria::expr()->eq('userAccount', $user))
-                ->andWhere(Criteria::expr()->notIn('status', $statusExculde))
+                ->andWhere(Criteria::expr()->notIn('status', $statusExclude))
                 ->andWhere(Criteria::expr()->eq('level', $level));
             $tickets = $ticketRepository->matching($criteriaUser);
         }
